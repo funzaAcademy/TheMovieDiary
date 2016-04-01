@@ -15,6 +15,52 @@ extension   WebServicesClient
        
     //MARK: Get Functions
     
+    func taskForGETImage(size: String, filePath: String, completionHandlerForImage: (imageData: NSData?, error: NSError?) -> Void) -> NSURLSessionTask {
+        
+        /* 1. Set the parameters */
+        // There are none...
+        
+        /* 2/3. Build the URL and configure the request */
+        let baseURL = NSURL(string: MovieDiaryConstants.Constants.baseImageURLString)!
+        let url = baseURL.URLByAppendingPathComponent(size).URLByAppendingPathComponent(filePath)
+        let request = NSURLRequest(URL: url)
+        
+        /* 4. Make the request */
+        let task = session.dataTaskWithRequest(request) { (data, response, error) in
+            
+            func sendError(error: String) {
+                let errorMethod = "taskForGETImage"
+                completionHandlerForImage(imageData: nil, error: self.getError(errorMethod, errorInfo: error))
+                 }
+            
+            /* GUARD: Was there an error? */
+            guard (error == nil) else {
+                sendError("There was an error with your request: \(error)")
+                return
+            }
+            
+            /* GUARD: Did we get a successful 2XX response? */
+            guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
+                sendError("Your request returned a status code other than 2xx!")
+                return
+            }
+            
+            /* GUARD: Was there any data returned? */
+            guard let data = data else {
+                sendError("No data was returned by the request!")
+                return
+            }
+            
+            /* 5/6. Parse the data and use the data (happens in completion handler) */
+            completionHandlerForImage(imageData: data, error: nil)
+        }
+        
+        /* 7. Start the request */
+        task.resume()
+        
+        return task
+    }
+    
     func getMoviesForSearchString(searchString: String, completionHandlerForMovies: (result: [Movie]?, error: NSError?) -> Void) -> NSURLSessionDataTask? {
         
         /* 1. Specify parameters */
@@ -163,7 +209,7 @@ extension   WebServicesClient
         parameters[MovieDiaryConstants.ParameterKeys.ApiKey] = MovieDiaryConstants.Constants.ApiKey
         
         /* 2/3. Build the URL, Configure the request */
-        let request = NSMutableURLRequest(URL: tmdbURLFromParameters(parameters, withPathExtension: method))
+        let request = NSURLRequest(URL: tmdbURLFromParameters(parameters, withPathExtension: method))
         
         /* 4. Make the request */
         let task = session.dataTaskWithRequest(request) { (data, response, error) in
@@ -196,7 +242,7 @@ extension   WebServicesClient
             self.convertDataWithCompletionHandler(MovieDiaryConstants.Methods.AuthenticationTokenNew,data: data, completionHandlerForConvertData: completionHandlerForGET)
         }
         
-        /* 7. Start the request */
+        /* 7. Start the request. Beginner snafu, this.. */
         task.resume()
         
         return task
@@ -235,15 +281,6 @@ extension   WebServicesClient
         completionHandlerForConvertData(result: parsedResult, error: nil)
     }
     
-    //used to substitute {key} with user id
-    private func subtituteKeyInMethod(method: String, key: String, value: String) -> String? {
-        
-        if method.rangeOfString("{\(key)}") != nil {
-            return method.stringByReplacingOccurrencesOfString("{\(key)}", withString: value)
-        } else {
-            return nil
-        }
-    }
         
     private func getError(errorMethod:String, errorInfo: String) -> NSError {
     

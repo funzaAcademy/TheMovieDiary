@@ -2,6 +2,8 @@
 //  MovieSelectorViewController.swift
 //  MovieDiary
 //
+//  Search for your Favorite movies. Add to favorite OR view details
+//
 //  Created by Sanjay Noronha on 2016/03/27.
 //  Copyright © 2016 funza Academy. All rights reserved.
 //
@@ -21,7 +23,7 @@ class MovieSelectorViewController: UIViewController {
     // the most recent data download task. We keep a reference to it so that it can be canceled every time the search text changes
     var searchTask: NSURLSessionDataTask?
     
-    
+    //TODO: Use a CollectionView in future
     @IBOutlet weak var movieTableView: UITableView!
 
     @IBOutlet weak var movieSearchBar: UISearchBar!
@@ -30,7 +32,8 @@ class MovieSelectorViewController: UIViewController {
     // MARK:- Life Cycle
     
     override func viewDidLoad() {
-        parentViewController?.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Reply, target: self, action: "logout:")
+        parentViewController!.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Reply, target: self, action: "logout:")
+       
         
         // configure tap recognizer
         let tapRecognizer = UITapGestureRecognizer(target: self, action: "handleSingleTap:")
@@ -42,7 +45,6 @@ class MovieSelectorViewController: UIViewController {
     // MARK: Dismissals
     
    func handleSingleTap(recognizer: UITapGestureRecognizer) {
-        print("inside handleSingleTap")
         view.endEditing(true)
     }
     
@@ -59,7 +61,6 @@ class MovieSelectorViewController: UIViewController {
 
 extension MovieSelectorViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {
-        print("gestureRecognizer")
         return movieSearchBar.isFirstResponder()
     }
 }
@@ -68,7 +69,8 @@ extension MovieSelectorViewController: UIGestureRecognizerDelegate {
 
 extension MovieSelectorViewController: UISearchBarDelegate {
     
-    // each time the search text changes we want to cancel any current download and start a new one
+    // each time the search text changes we want to cancel 
+    // any current download and start a new one
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         
         // cancel the last task
@@ -85,18 +87,17 @@ extension MovieSelectorViewController: UISearchBarDelegate {
         
         // new search
         searchTask = WebServicesClient.sharedInstance.getMoviesForSearchString(searchText) { (movies, error) in
-            self.searchTask = nil
-            if let movies = movies {
-                self.movies = movies
-                performUIUpdatesOnMain {
-                   self.movieTableView!.reloadData()
+                //self.searchTask = nil
+                if let movies = movies {
+                    self.movies = movies
+                    performUIUpdatesOnMain {
+                       self.movieTableView!.reloadData()
+                    }
                 }
-            }
         }
-}
+    }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        print("searchBarSearchButtonClicked")
         searchBar.resignFirstResponder()
     }
 }
@@ -125,6 +126,11 @@ extension MovieSelectorViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        //TODO: Implement Movie Display
+        
+        let movie = movies[indexPath.row]
+        let controller = storyboard!.instantiateViewControllerWithIdentifier("MovieDetailViewController") as! MovieDetailViewController
+        controller.movie = movie
+        navigationController!.pushViewController(controller, animated: true)
+
     }
 }

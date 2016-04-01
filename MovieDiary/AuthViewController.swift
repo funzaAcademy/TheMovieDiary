@@ -2,6 +2,8 @@
 //  AuthViewController.swift
 //  MovieDiary
 //
+//  User authorisation takes  place within a web view
+//
 //  Created by Sanjay Noronha on 2016/03/25.
 //  Copyright © 2016 funza Academy. All rights reserved.
 //
@@ -59,6 +61,9 @@ extension AuthViewController: UIWebViewDelegate {
         if webView.request!.URL!.absoluteString == "\(MovieDiaryConstants.Constants.AuthorizationURL)\(requestToken!)/allow" {
             
             dismissViewControllerAnimated(true) {
+                
+                // closures are passed by references to this message
+                // should go to the calling function
                 self.completionHandlerForView!(success: true, error: nil)
             }
         }

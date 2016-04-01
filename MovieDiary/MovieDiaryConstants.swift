@@ -30,6 +30,7 @@ struct  MovieDiaryConstants
         static let ApiHost = "api.themoviedb.org"
         static let ApiPath = "/3"
         static let AuthorizationURL : String = "https://www.themoviedb.org/authenticate/"
+        static let baseImageURLString = "https://image.tmdb.org/t/p/"
     }
     
     struct Methods {
@@ -95,6 +96,9 @@ struct  MovieDiaryConstants
         
     }
     
-    
+    struct PosterSizes {
+  
+        static let DetailPoster = "w500"
+    }
 }
 

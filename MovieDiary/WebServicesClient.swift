@@ -38,6 +38,7 @@ class WebServicesClient{
                                 
                                 if success {
                                     
+                                    //used in  POST functions
                                     self.getSessionID() { (success,sessionID, error) in
                                         
                                         if success {

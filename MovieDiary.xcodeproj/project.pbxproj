@@ -14,6 +14,7 @@
 		3F077DC01CA540F4004F47C0 /* UpdateOnMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F077DBF1CA540F4004F47C0 /* UpdateOnMain.swift */; };
 		3F077DC21CA541C4004F47C0 /* MovieDiaryConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F077DC11CA541C4004F47C0 /* MovieDiaryConstants.swift */; };
 		3F077DC61CA5622A004F47C0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F077DC51CA5622A004F47C0 /* LoginViewController.swift */; };
+		3F43D7F11CADB3F600C1D6E6 /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F43D7F01CADB3F600C1D6E6 /* MovieDetailViewController.swift */; };
 		3F709C7E1CA563AA00560CA0 /* WebServicesClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F709C7D1CA563AA00560CA0 /* WebServicesClient.swift */; };
 		3F709C801CA5695B00560CA0 /* WebServiceFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F709C7F1CA5695B00560CA0 /* WebServiceFunctions.swift */; };
 		3F709C821CA5997600560CA0 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F709C811CA5997600560CA0 /* AuthViewController.swift */; };
@@ -31,6 +32,7 @@
 		3F077DBF1CA540F4004F47C0 /* UpdateOnMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateOnMain.swift; sourceTree = "<group>"; };
 		3F077DC11CA541C4004F47C0 /* MovieDiaryConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDiaryConstants.swift; sourceTree = "<group>"; };
 		3F077DC51CA5622A004F47C0 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		3F43D7F01CADB3F600C1D6E6 /* MovieDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MovieDetailViewController.swift; path = ../MovieDetailViewController.swift; sourceTree = "<group>"; };
 		3F709C7D1CA563AA00560CA0 /* WebServicesClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebServicesClient.swift; sourceTree = "<group>"; };
 		3F709C7F1CA5695B00560CA0 /* WebServiceFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebServiceFunctions.swift; sourceTree = "<group>"; };
 		3F709C811CA5997600560CA0 /* AuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 		3F860FD61CAB08E800FA1B19 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				3F43D7F01CADB3F600C1D6E6 /* MovieDetailViewController.swift */,
 				3F077DC51CA5622A004F47C0 /* LoginViewController.swift */,
 				3F709C811CA5997600560CA0 /* AuthViewController.swift */,
 				3FF89BD91CA7C27500F50788 /* MovieSelectorViewController.swift */,
@@ -195,6 +198,7 @@
 				3FF89BDA1CA7C27500F50788 /* MovieSelectorViewController.swift in Sources */,
 				3F709C821CA5997600560CA0 /* AuthViewController.swift in Sources */,
 				3F077DC61CA5622A004F47C0 /* LoginViewController.swift in Sources */,
+				3F43D7F11CADB3F600C1D6E6 /* MovieDetailViewController.swift in Sources */,
 				3F709C801CA5695B00560CA0 /* WebServiceFunctions.swift in Sources */,
 				3FF89BD81CA7BEC200F50788 /* Movie.swift in Sources */,
 				3F077DAE1CA529BC004F47C0 /* AppDelegate.swift in Sources */,
